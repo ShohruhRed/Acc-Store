@@ -1,4 +1,4 @@
-﻿using Acc.Services.ProductAPI.Models;
+﻿using Acc.Services.ProductAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Acc.Services.ProductAPI.DbContexts
