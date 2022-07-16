@@ -1,3 +1,6 @@
+using Acc.Services.ProductAPI.DbContexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Acc.Services.ProductAPI
 {
     public class Program
@@ -12,6 +15,7 @@ namespace Acc.Services.ProductAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
