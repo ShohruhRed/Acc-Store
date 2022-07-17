@@ -1,4 +1,5 @@
 using Acc.Services.ProductAPI.DbContexts;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Acc.Services.ProductAPI
@@ -8,6 +9,7 @@ namespace Acc.Services.ProductAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 
             // Add services to the container.
 
@@ -16,6 +18,8 @@ namespace Acc.Services.ProductAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddSingleton(mapper);
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 
