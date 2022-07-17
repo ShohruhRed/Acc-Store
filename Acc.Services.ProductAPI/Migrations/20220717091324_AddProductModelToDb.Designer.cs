@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acc.Services.ProductAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220716140411_AddProductModelToDb")]
+    [Migration("20220717091324_AddProductModelToDb")]
     partial class AddProductModelToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace Acc.Services.ProductAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Acc.Services.ProductAPI.Models.Product", b =>
+            modelBuilder.Entity("Acc.Services.ProductAPI.Models.Dto.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -31,8 +31,9 @@ namespace Acc.Services.ProductAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
-                    b.Property<int>("CategoryName")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -52,6 +53,17 @@ namespace Acc.Services.ProductAPI.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryName = "CPU",
+                            Description = " 5.1 GHz, 16MB, oem, LGA1200, Comet Lake ",
+                            ImageUrl = "",
+                            Name = "Intel Core i9 10900F",
+                            Price = 390.0
+                        });
                 });
 #pragma warning restore 612, 618
         }

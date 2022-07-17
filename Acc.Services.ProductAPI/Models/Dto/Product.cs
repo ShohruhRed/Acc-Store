@@ -11,7 +11,7 @@ namespace Acc.Services.ProductAPI.Models.Dto
         [Range(1, 1000)]
         public double Price { get; set; }
         public string Description { get; set; }
-        public int CategoryName { get; set; }
+        public string CategoryName { get; set; }
         public string ImageUrl { get; set; }
 
     }
