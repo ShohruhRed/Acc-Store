@@ -24,11 +24,6 @@ namespace Acc.Services.ProductAPI.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "ProductId", "CategoryName", "Description", "ImageUrl", "Name", "Price" },
-                values: new object[] { 1, "CPU", " 5.1 GHz, 16MB, oem, LGA1200, Comet Lake ", "", "Intel Core i9 10900F", 390.0 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

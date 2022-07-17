@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acc.Services.ProductAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220717091324_AddProductModelToDb")]
+    [Migration("20220717103913_AddProductModelToDb")]
     partial class AddProductModelToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,17 +53,6 @@ namespace Acc.Services.ProductAPI.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryName = "CPU",
-                            Description = " 5.1 GHz, 16MB, oem, LGA1200, Comet Lake ",
-                            ImageUrl = "",
-                            Name = "Intel Core i9 10900F",
-                            Price = 390.0
-                        });
                 });
 #pragma warning restore 612, 618
         }
