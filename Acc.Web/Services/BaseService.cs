@@ -7,12 +7,12 @@ namespace Acc.Web.Services
 {
     public class BaseService : IBaseService
     {
-        public ResponseDto responseDto { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ResponseDto responseModel { get; set; }
         public IHttpClientFactory httpClient { get; set; }
 
         public BaseService(IHttpClientFactory httpClient)
         {
-            this.responseDto = new ResponseDto();
+            this.responseModel = new ResponseDto();
             this.httpClient = httpClient;
         }
         

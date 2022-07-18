@@ -4,7 +4,7 @@ namespace Acc.Web.Services.IServices
 {
     public interface IBaseService : IDisposable
     {
-        ResponseDto responseDto { get; set; }
+        ResponseDto responseModel { get; set; }
         Task<T> SendAsync<T>(ApiRequest apiRequest);
     }
 }
