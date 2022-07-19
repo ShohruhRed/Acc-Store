@@ -26,5 +26,29 @@ namespace Acc.Web.Controllers
             }
             return View(list);
         }
+
+        public async Task<IActionResult> ProductCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> ProductCreate(ProductDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _productService.CreateProductAsync<ResponseDto>(model);
+
+                if (response != null && response.IsSucces)
+                {
+                    return RedirectToAction(nameof(ProductIndex));
+                }
+            }
+
+            return View(model);
+
+        }
     }
 }
