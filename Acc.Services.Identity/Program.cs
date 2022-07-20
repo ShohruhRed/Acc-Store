@@ -1,3 +1,8 @@
+using Acc.Services.Identity.DbContexts;
+using Acc.Services.Identity.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 namespace Acc.Services.Identity
 {
     public class Program
@@ -8,6 +13,26 @@ namespace Acc.Services.Identity
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+            var start = builder.Services.AddIdentityServer(options =>
+            {
+                options.Events.RaiseErrorEvents = true;
+                options.Events.RaiseInformationEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseSuccessEvents = true;
+                options.EmitStaticAudienceClaim = true;
+            }).AddInMemoryIdentityResources(SD.IdentityResources)
+            .AddInMemoryApiScopes(SD.ApiScopes)
+            .AddInMemoryClients(SD.Clients)
+            .AddAspNetIdentity<ApplicationUser>();
+
+            start.AddDeveloperSigningCredential();
+                      
+
 
             var app = builder.Build();
 
@@ -24,8 +49,10 @@ namespace Acc.Services.Identity
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseIdentityServer();
 
+            app.UseAuthorization();
+             
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

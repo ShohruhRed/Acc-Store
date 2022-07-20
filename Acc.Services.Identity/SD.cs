@@ -39,8 +39,8 @@ namespace Acc.Services.Identity
                     ClientId = "acc",
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris={ "https://localhost:45617/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:45617/signin-callback-oidc" },
+                    RedirectUris={ "https://localhost:44368/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44368/signout-callback-oidc" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
