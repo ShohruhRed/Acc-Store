@@ -102,15 +102,15 @@ namespace Acc.Web.Controllers
         public async Task<IActionResult> ProductDelete(ProductDto model)
         {
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId);
 
                 if (response.IsSucces)
                 {
                     return RedirectToAction(nameof(ProductIndex));
                 }
-            }
+            //}
 
             return View(model);
 
