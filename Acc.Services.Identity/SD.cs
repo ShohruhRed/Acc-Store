@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 
 namespace Acc.Services.Identity
 {
@@ -16,8 +17,8 @@ namespace Acc.Services.Identity
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-            new List<ApiScope> { 
-            new ApiScope("Acc","Acc Server"),
+            new List<ApiScope> {
+            new ApiScope("acc","Acc Server"),
             new ApiScope(name: "read",displayName:"Read your data"),
             new ApiScope(name: "write",displayName:"Write your data"),
             new ApiScope(name: "delete",displayName:"Delete your data"),
@@ -32,6 +33,22 @@ namespace Acc.Services.Identity
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes = {"read","write","profile"}
+                },
+                new Client
+                {
+                    ClientId = "acc",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris={ "https://localhost:45617/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:45617/signin-callback-oidc" },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "acc"
+
+                    }
                 },
             };
 
