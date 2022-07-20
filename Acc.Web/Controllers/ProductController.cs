@@ -34,7 +34,6 @@ namespace Acc.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> ProductCreate(ProductDto model)
         {
             if (ModelState.IsValid)
@@ -102,15 +101,16 @@ namespace Acc.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductDelete(ProductDto model)
         {
-            //if (ModelState.IsValid)
-            //{
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            if (ModelState.IsValid)
+            {
                 var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId);
 
                 if (response.IsSucces)
                 {
                     return RedirectToAction(nameof(ProductIndex));
                 }
-            //}
+            }
 
             return View(model);
 
