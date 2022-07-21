@@ -34,7 +34,7 @@ namespace Acc.Services.Identity.Initializer
 
             ApplicationUser adminUser = new ApplicationUser()
             {
-                UserName = "adminFirst",
+                UserName = "AdminFirst",
                 Email = "adminfirst@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "7777777777",
@@ -42,7 +42,7 @@ namespace Acc.Services.Identity.Initializer
                 LastName = "Admin"
             };
 
-            _userManager.CreateAsync(adminUser, "admin777").GetAwaiter().GetResult();
+            _userManager.CreateAsync(adminUser, "Admin777*").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(adminUser, SD.Admin).GetAwaiter().GetResult();
 
             var temp1 = _userManager.AddClaimsAsync(adminUser, new Claim[]
@@ -55,7 +55,7 @@ namespace Acc.Services.Identity.Initializer
 
             ApplicationUser customerUser = new ApplicationUser()
             {
-                UserName = "customerFirst",
+                UserName = "CustomerFirst",
                 Email = "customerfirst@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "7777777777",
@@ -63,7 +63,7 @@ namespace Acc.Services.Identity.Initializer
                 LastName = "NotAdmin"
             };
 
-            _userManager.CreateAsync(customerUser, "admin777").GetAwaiter().GetResult();
+            _userManager.CreateAsync(customerUser, "Admin777*").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(customerUser, SD.Customer).GetAwaiter().GetResult();
 
             var temp2 = _userManager.AddClaimsAsync(customerUser, new Claim[]
