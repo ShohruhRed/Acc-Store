@@ -27,7 +27,7 @@ namespace Acc.Services.ProductAPI
             builder.Services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:44373/";
+                    options.Authority = "https://localhost:7221/";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateAudience = false
@@ -38,7 +38,7 @@ namespace Acc.Services.ProductAPI
             {
                 options.AddPolicy("ApiScope", policy =>
                 {
-                    policy.RequireClaim("scope", "app");
+                    policy.RequireClaim("scope", "acc");
                 });
             });
 

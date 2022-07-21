@@ -24,7 +24,7 @@ namespace Acc.Web
                 .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = builder.Configuration["ServiceUrls:ProductAPI"];
+                    options.Authority = builder.Configuration["ServiceUrls:IdentityAPI"];
                     options.GetClaimsFromUserInfoEndpoint = true;
                     options.ClientId = "acc";
                     options.ClientSecret = "secret";
