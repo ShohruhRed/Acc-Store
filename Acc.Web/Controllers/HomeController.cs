@@ -38,7 +38,7 @@ namespace Acc.Web.Controllers
 
         public IActionResult LogOut()
         {
-            return SignOut("Cookies", "iodc");
+            return SignOut("Cookies", "oidc");
         }
     }
 }
